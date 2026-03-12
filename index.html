@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kalkulator</title>
+
+    <link rel="stylesheet" href="ui.css"/>
+
+</head>
+<body>
+    <div class="Frame">
+        <section>
+            <center>
+                <h1 class="Titleteks">KALKULATOR</h1>
+                <table border="1">
+                    <tr class="baris1">
+                        <td colspan="4">
+                            <input id="screen" readonly> </input>
+                        </td>
+                    </tr>
+                    <tr class="baris2">
+                        <td><button id="num7">7</button></td>
+                        <td><button id="num8">8</button></td>
+                        <td><button id="num9">9</button></td>
+                        <td><button id="plus">+</button></td>
+                    </tr>
+                    <tr class="baris3">
+                        <td><button id="num4">4</button></td>
+                        <td><button id="num5">5</button></td>
+                        <td><button id="num6">6</button></td>
+                        <td><button id="minus">-</button></td>
+                    </tr>
+                    <tr class="baris4">
+                        <td><button id="num1">1</button></td>
+                        <td><button id="num2">2</button></td>
+                        <td><button id="num3">3</button></td>
+                        <td><button id="kali">x</button></td>
+                    </tr>
+                    <tr class="baris5">
+                        <td><button id="reset">C</button></td>
+                        <td><button id="num0">0</button></td>
+                        <td><button id="remove">R</button></td>
+                        <td><button id="bagi">/</button></td>
+                    </tr>
+                    <tr class="baris6">
+                        <td colspan="4"><button class="enter" id="Enter">ENTER</button></td>
+                    </tr>
+                </table>
+            </center>
+        </section>
+        
+        
+        <script>
+            let screenvalue = ""
+
+            const screen = document.getElementById('screen')
+            const reset = document.getElementById('reset')
+            const enter = document.getElementById('Enter')
+            const remove = document.getElementById('remove')
+
+            const nums = [
+                document.getElementById('num0'),
+                document.getElementById('num1'),
+                document.getElementById('num2'),
+                document.getElementById('num3'),
+                document.getElementById('num4'),
+                document.getElementById('num5'),
+                document.getElementById('num6'),
+                document.getElementById('num7'),
+                document.getElementById('num8'),
+                document.getElementById('num9')
+            ];
+
+            const operations = [
+                document.getElementById('plus'),
+                document.getElementById('minus'),
+                document.getElementById('bagi'),
+                document.getElementById('kali'),
+            ]
+
+            nums.forEach(num => {
+                num.addEventListener('click', () => {
+                    screen.value += num.textContent;
+                    screenvalue = screen.value
+                });
+            });
+
+            operations.forEach(op => {
+                op.addEventListener('click', () => {
+                    screen.value = screenvalue
+                    screen.value += op.textContent;
+                });
+            });
+
+            enter.addEventListener('click', () => {
+                try {
+                    screen.value = eval(screen.value.replace(/x/g, '*'));
+                    screenvalue = screen.value
+                } catch (error) {
+                    screen.value = 'Error';
+                }
+            })
+
+            reset.addEventListener('click', () => {
+                screen.value = ''
+                screenvalue = ""
+            })
+
+            remove.addEventListener('click', () => {
+                screen.value = screen.value.slice(0, -1)
+                screenvalue = screen.value
+            })
+            
+        </script>
+
+    </div>
+</body>
+</html>
